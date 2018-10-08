@@ -1,0 +1,1370 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HAR\_EDA}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{humanactivityrecognition}{%
+\section{HumanActivityRecognition}\label{humanactivityrecognition}}
+
+This project is to build a model that predicts the human activities such
+as Walking, Walking\_Upstairs, Walking\_Downstairs, Sitting, Standing or
+Laying.
+
+This dataset is collected from 30 persons(referred as subjects in this
+dataset), performing different activities with a smartphone to their
+waists. The data is recorded with the help of sensors (accelerometer and
+Gyroscope) in that smartphone. This experiment was video recorded to
+label the data manually.
+
+\hypertarget{how-data-was-recorded}{%
+\subsection{How data was recorded}\label{how-data-was-recorded}}
+
+By using the sensors(Gyroscope and accelerometer) in a smartphone, they
+have captured `3-axial linear acceleration'(\emph{tAcc-XYZ}) from
+accelerometer and `3-axial angular velocity' (\emph{tGyro-XYZ}) from
+Gyroscope with several variations.
+
+\begin{quote}
+prefix `t' in those metrics denotes time.
+\end{quote}
+
+\begin{quote}
+suffix `XYZ' represents 3-axial signals in X , Y, and Z directions.
+\end{quote}
+
+\hypertarget{feature-names}{%
+\subsubsection{Feature names}\label{feature-names}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  These sensor signals are preprocessed by applying noise filters and
+  then sampled in fixed-width windows(sliding windows) of 2.56 seconds
+  each with 50\% overlap. ie., each window has 128 readings.
+\item
+  From Each window, a feature vector was obtianed by calculating
+  variables from the time and frequency domain. \textgreater{} In our
+  dataset, each datapoint represents a window with different readings
+\item
+  The accelertion signal was saperated into Body and Gravity
+  acceleration signals(\textbf{\emph{tBodyAcc-XYZ}} and
+  \textbf{\emph{tGravityAcc-XYZ}}) using some low pass filter with
+  corner frequecy of 0.3Hz.
+\item
+  After that, the body linear acceleration and angular velocity were
+  derived in time to obtian \emph{jerk signals}
+  (\textbf{\emph{tBodyAccJerk-XYZ}} and
+  \textbf{\emph{tBodyGyroJerk-XYZ}}).
+\item
+  The magnitude of these 3-dimensional signals were calculated using the
+  Euclidian norm. This magnitudes are represented as features with names
+  like \emph{tBodyAccMag}, \emph{tGravityAccMag},
+  \emph{tBodyAccJerkMag}, \emph{tBodyGyroMag} and
+  \emph{tBodyGyroJerkMag}.
+\item
+  Finally, We've got frequency domain signals from some of the available
+  signals by applying a FFT (Fast Fourier Transform). These signals
+  obtained were labeled with \textbf{\emph{prefix `f'}} just like
+  original signals with \textbf{\emph{prefix `t'}}. These signals are
+  labeled as \textbf{\emph{fBodyAcc-XYZ}}, \textbf{\emph{fBodyGyroMag}}
+  etc.,.
+\item
+  These are the signals that we got so far.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    tBodyAcc-XYZ
+  \item
+    tGravityAcc-XYZ
+  \item
+    tBodyAccJerk-XYZ
+  \item
+    tBodyGyro-XYZ
+  \item
+    tBodyGyroJerk-XYZ
+  \item
+    tBodyAccMag
+  \item
+    tGravityAccMag
+  \item
+    tBodyAccJerkMag
+  \item
+    tBodyGyroMag
+  \item
+    tBodyGyroJerkMag
+  \item
+    fBodyAcc-XYZ
+  \item
+    fBodyAccJerk-XYZ
+  \item
+    fBodyGyro-XYZ
+  \item
+    fBodyAccMag
+  \item
+    fBodyAccJerkMag
+  \item
+    fBodyGyroMag
+  \item
+    fBodyGyroJerkMag
+  \end{itemize}
+\item
+  We can esitmate some set of variables from the above signals. ie., We
+  will estimate the following properties on each and every signal that
+  we recoreded so far.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{\emph{mean()}}: Mean value
+  \item
+    \textbf{\emph{std()}}: Standard deviation
+  \item
+    \textbf{\emph{mad()}}: Median absolute deviation
+  \item
+    \textbf{\emph{max()}}: Largest value in array
+  \item
+    \textbf{\emph{min()}}: Smallest value in array
+  \item
+    \textbf{\emph{sma()}}: Signal magnitude area
+  \item
+    \textbf{\emph{energy()}}: Energy measure. Sum of the squares divided
+    by the number of values.
+  \item
+    \textbf{\emph{iqr()}}: Interquartile range
+  \item
+    \textbf{\emph{entropy()}}: Signal entropy
+  \item
+    \textbf{\emph{arCoeff()}}: Autorregresion coefficients with Burg
+    order equal to 4
+  \item
+    \textbf{\emph{correlation()}}: correlation coefficient between two
+    signals
+  \item
+    \textbf{\emph{maxInds()}}: index of the frequency component with
+    largest magnitude
+  \item
+    \textbf{\emph{meanFreq()}}: Weighted average of the frequency
+    components to obtain a mean frequency
+  \item
+    \textbf{\emph{skewness()}}: skewness of the frequency domain signal
+  \item
+    \textbf{\emph{kurtosis()}}: kurtosis of the frequency domain signal
+  \item
+    \textbf{\emph{bandsEnergy()}}: Energy of a frequency interval within
+    the 64 bins of the FFT of each window.
+  \item
+    \textbf{\emph{angle()}}: Angle between to vectors.
+  \end{itemize}
+\item
+  We can obtain some other vectors by taking the average of signals in a
+  single window sample. These are used on the angle() variable' `
+
+  \begin{itemize}
+  \tightlist
+  \item
+    gravityMean
+  \item
+    tBodyAccMean
+  \item
+    tBodyAccJerkMean
+  \item
+    tBodyGyroMean
+  \item
+    tBodyGyroJerkMean
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{y_labelsencoded}{%
+\subsubsection{Y\_Labels(Encoded)}\label{y_labelsencoded}}
+
+\begin{itemize}
+\item
+  In the dataset, Y\_labels are represented as numbers from 1 to 6 as
+  their identifiers.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    WALKING as \textbf{1}
+  \item
+    WALKING\_UPSTAIRS as \textbf{2}
+  \item
+    WALKING\_DOWNSTAIRS as \textbf{3}
+  \item
+    SITTING as \textbf{4}
+  \item
+    STANDING as \textbf{5}
+  \item
+    LAYING as \textbf{6}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{train-and-test-data-were-saperated}{%
+\subsection{Train and test data were
+saperated}\label{train-and-test-data-were-saperated}}
+
+\begin{itemize}
+\tightlist
+\item
+  The readings from \textbf{\emph{70\%}} of the volunteers were taken as
+  \textbf{\emph{trianing data}} and remaining \textbf{\emph{30\%}}
+  subjects recordings were taken for \textbf{\emph{test data}}
+\end{itemize}
+
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+\begin{itemize}
+\tightlist
+\item
+  All the data is present in `UCI\_HAR\_dataset/' folder in present
+  working directory.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Feature names are present in `UCI\_HAR\_dataset/features.txt'
+  \item
+    \textbf{\emph{Train Data}}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      `UCI\_HAR\_dataset/train/X\_train.txt'
+    \item
+      `UCI\_HAR\_dataset/train/subject\_train.txt'
+    \item
+      `UCI\_HAR\_dataset/train/y\_train.txt'
+    \end{itemize}
+  \item
+    \textbf{\emph{Test Data}}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      `UCI\_HAR\_dataset/test/X\_test.txt'
+    \item
+      `UCI\_HAR\_dataset/test/subject\_test.txt'
+    \item
+      `UCI\_HAR\_dataset/test/y\_test.txt'
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{data-size}{%
+\subsection{Data Size :}\label{data-size}}
+
+\begin{quote}
+27 MB
+\end{quote}
+
+    
+
+    
+
+    
+
+    \hypertarget{quick-overview-of-the-dataset}{%
+\section{Quick overview of the dataset
+:}\label{quick-overview-of-the-dataset}}
+
+    \begin{itemize}
+\item
+  Accelerometer and Gyroscope readings are taken from 30
+  volunteers(referred as subjects) while performing the following 6
+  Activities.
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Walking\\
+  \item
+    WalkingUpstairs
+  \item
+    WalkingDownstairs
+  \item
+    Standing
+  \item
+    Sitting
+  \item
+    Lying.
+  \end{enumerate}
+\item
+  Readings are divided into a window of 2.56 seconds with 50\%
+  overlapping.
+\item
+  Accelerometer readings are divided into gravity acceleration and body
+  acceleration readings, which has x,y and z components each.
+\item
+  Gyroscope readings are the measure of angular velocities which has x,y
+  and z components.
+\item
+  Jerk signals are calculated for BodyAcceleration readings.
+\item
+  Fourier Transforms are made on the above time readings to obtain
+  frequency readings.
+\item
+  Now, on all the base signal readings., mean, max, mad, sma,
+  arcoefficient, engerybands,entropy etc., are calculated for each
+  window.
+\item
+  We get a feature vector of 561 features and these features are given
+  in the dataset.
+\item
+  Each window of readings is a datapoint of 561 features.
+\end{itemize}
+
+\hypertarget{problem-framework}{%
+\subsection{Problem Framework}\label{problem-framework}}
+
+\begin{itemize}
+\tightlist
+\item
+  30 subjects(volunteers) data is randomly split to 70\%(21) test and
+  30\%(7) train data.
+\item
+  Each datapoint corresponds one of the 6 Activities.
+\end{itemize}
+
+    \hypertarget{problem-statement}{%
+\subsection{Problem Statement}\label{problem-statement}}
+
+\begin{itemize}
+\tightlist
+\item
+  Given a new datapoint we have to predict the Activity
+\end{itemize}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        
+        \PY{c+c1}{\PYZsh{} get the features from the file features.txt}
+        \PY{n}{features} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{p}{)}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}Dataset/features.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{features} \PY{o}{=} \PY{p}{[}\PY{n}{line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No of Features: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{features}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No of Features: 561
+
+    \end{Verbatim}
+
+    \hypertarget{obtain-the-train-data}{%
+\subsection{Obtain the train data}\label{obtain-the-train-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} get the data from txt files to pandas dataffame}
+        \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}dataset/train/X\PYZus{}train.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delim\PYZus{}whitespace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{n}{features}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} add subject column to the dataframe}
+        \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}dataset/train/subject\PYZus{}train.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{squeeze}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}dataset/train/y\PYZus{}train.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{squeeze}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{y\PYZus{}train\PYZus{}labels} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WALKING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WALKING\PYZus{}UPSTAIRS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WALKING\PYZus{}DOWNSTAIRS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                               \PY{l+m+mi}{4}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SITTING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{STANDING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LAYING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} put all columns in a single dataframe}
+        \PY{n}{train} \PY{o}{=} \PY{n}{X\PYZus{}train}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{y\PYZus{}train}
+        \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{y\PYZus{}train\PYZus{}labels}
+        \PY{n}{train}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+D:\textbackslash{}installed\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}io\textbackslash{}parsers.py:678: UserWarning: Duplicate names specified. This will raise an error in the future.
+  return \_read(filepath\_or\_buffer, kwds)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}       tBodyAcc-mean()-X  tBodyAcc-mean()-Y  tBodyAcc-mean()-Z  \textbackslash{}
+        6015             0.2797          -0.004397           -0.10952   
+        
+              tBodyAcc-std()-X  tBodyAcc-std()-Y  tBodyAcc-std()-Z  tBodyAcc-mad()-X  \textbackslash{}
+        6015          0.359081          0.119909         -0.177541          0.337963   
+        
+              tBodyAcc-mad()-Y  tBodyAcc-mad()-Z  tBodyAcc-max()-X  \textbackslash{}
+        6015          0.066883         -0.221876          0.474093   
+        
+                     {\ldots}          angle(tBodyAccMean,gravity)  \textbackslash{}
+        6015         {\ldots}                             0.049658   
+        
+              angle(tBodyAccJerkMean),gravityMean)  angle(tBodyGyroMean,gravityMean)  \textbackslash{}
+        6015                              0.602595                          0.681696   
+        
+              angle(tBodyGyroJerkMean,gravityMean)  angle(X,gravityMean)  \textbackslash{}
+        6015                               0.51333             -0.862824   
+        
+              angle(Y,gravityMean)  angle(Z,gravityMean)  subject  Activity  \textbackslash{}
+        6015              0.190833              0.038933       27         3   
+        
+                    ActivityName  
+        6015  WALKING\_DOWNSTAIRS  
+        
+        [1 rows x 564 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} (7352, 564)
+\end{Verbatim}
+            
+    \hypertarget{obtain-the-test-data}{%
+\subsection{Obtain the test data}\label{obtain-the-test-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} get the data from txt files to pandas dataffame}
+        \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}dataset/test/X\PYZus{}test.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delim\PYZus{}whitespace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{n}{features}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} add subject column to the dataframe}
+        \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}dataset/test/subject\PYZus{}test.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{squeeze}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} get y labels from the txt file}
+        \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}dataset/test/y\PYZus{}test.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{squeeze}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{y\PYZus{}test\PYZus{}labels} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+m+mi}{1}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WALKING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WALKING\PYZus{}UPSTAIRS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WALKING\PYZus{}DOWNSTAIRS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                               \PY{l+m+mi}{4}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SITTING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{STANDING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LAYING}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} put all columns in a single dataframe}
+        \PY{n}{test} \PY{o}{=} \PY{n}{X\PYZus{}test}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{y\PYZus{}test}
+        \PY{n}{test}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{y\PYZus{}test\PYZus{}labels}
+        \PY{n}{test}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+D:\textbackslash{}installed\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}pandas\textbackslash{}io\textbackslash{}parsers.py:678: UserWarning: Duplicate names specified. This will raise an error in the future.
+  return \_read(filepath\_or\_buffer, kwds)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}       tBodyAcc-mean()-X  tBodyAcc-mean()-Y  tBodyAcc-mean()-Z  \textbackslash{}
+        2261           0.279196          -0.018261          -0.103376   
+        
+              tBodyAcc-std()-X  tBodyAcc-std()-Y  tBodyAcc-std()-Z  tBodyAcc-mad()-X  \textbackslash{}
+        2261         -0.996955         -0.982959         -0.988239           -0.9972   
+        
+              tBodyAcc-mad()-Y  tBodyAcc-mad()-Z  tBodyAcc-max()-X      {\ldots}       \textbackslash{}
+        2261         -0.982509         -0.986964         -0.940634      {\ldots}        
+        
+              angle(tBodyAccMean,gravity)  angle(tBodyAccJerkMean),gravityMean)  \textbackslash{}
+        2261                    -0.268441                             -0.215632   
+        
+              angle(tBodyGyroMean,gravityMean)  angle(tBodyGyroJerkMean,gravityMean)  \textbackslash{}
+        2261                         -0.465366                              0.098119   
+        
+              angle(X,gravityMean)  angle(Y,gravityMean)  angle(Z,gravityMean)  \textbackslash{}
+        2261             -0.612458             -0.033918             -0.224544   
+        
+              subject  Activity  ActivityName  
+        2261       20         4       SITTING  
+        
+        [1 rows x 564 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} (2947, 564)
+\end{Verbatim}
+            
+    
+
+    \hypertarget{data-cleaning}{%
+\section{Data Cleaning}\label{data-cleaning}}
+
+    \hypertarget{check-for-duplicates}{%
+\subsection{1. Check for Duplicates}\label{check-for-duplicates}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No of duplicates in train: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No of duplicates in test : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+No of duplicates in train: 0
+No of duplicates in test : 0
+
+    \end{Verbatim}
+
+    
+
+    \hypertarget{checking-for-nannull-values}{%
+\subsection{2. Checking for NaN/null
+values}\label{checking-for-nannull-values}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{We have }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ NaN/Null values in train}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{We have }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ NaN/Null values in test}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+We have 0 NaN/Null values in train
+We have 0 NaN/Null values in test
+
+    \end{Verbatim}
+
+    
+
+    
+
+    \hypertarget{check-for-data-imbalance}{%
+\subsection{3. Check for data
+imbalance}\label{check-for-data-imbalance}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}style}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.family}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dejavu Sans}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data provided by each user}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{train}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+We have got almost same number of reading from all the subjects
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No of Datapoints per Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{ActivityName}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{observation}{%
+\subsubsection{Observation}\label{observation}}
+
+\begin{quote}
+Our data is well balanced (almost)
+\end{quote}
+
+    \hypertarget{changing-feature-names}{%
+\subsection{4. Changing feature names}\label{changing-feature-names}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{columns} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{columns}
+         
+         \PY{c+c1}{\PYZsh{} Removing \PYZsq{}()\PYZsq{} from column names}
+         \PY{n}{columns} \PY{o}{=} \PY{n}{columns}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[()]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{columns} \PY{o}{=} \PY{n}{columns}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[\PYZhy{}]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{columns} \PY{o}{=} \PY{n}{columns}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[,]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{train}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{columns}
+         \PY{n}{test}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{columns}
+         
+         \PY{n}{test}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} Index(['tBodyAccmeanX', 'tBodyAccmeanY', 'tBodyAccmeanZ', 'tBodyAccstdX',
+                'tBodyAccstdY', 'tBodyAccstdZ', 'tBodyAccmadX', 'tBodyAccmadY',
+                'tBodyAccmadZ', 'tBodyAccmaxX',
+                {\ldots}
+                'angletBodyAccMeangravity', 'angletBodyAccJerkMeangravityMean',
+                'angletBodyGyroMeangravityMean', 'angletBodyGyroJerkMeangravityMean',
+                'angleXgravityMean', 'angleYgravityMean', 'angleZgravityMean',
+                'subject', 'Activity', 'ActivityName'],
+               dtype='object', length=564)
+\end{Verbatim}
+            
+    \hypertarget{save-this-dataframe-in-a-csv-files}{%
+\subsection{5. Save this dataframe in a csv
+files}\label{save-this-dataframe-in-a-csv-files}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{train}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}Dataset/csv\PYZus{}files/train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{test}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UCI\PYZus{}HAR\PYZus{}Dataset/csv\PYZus{}files/test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+
+    \hypertarget{exploratory-data-analysis}{%
+\section{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+
+    ``\textbf{\emph{Without domain knowledge EDA has no meaning, without EDA
+a problem has no soul.}}''
+
+    \hypertarget{featuring-engineering-from-domain-knowledge}{%
+\subsubsection{1. Featuring Engineering from Domain
+Knowledge}\label{featuring-engineering-from-domain-knowledge}}
+
+    \begin{itemize}
+\item
+  \textbf{Static and Dynamic Activities}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In static activities (sit, stand, lie down) motion information will
+    not be very useful.
+  \item
+    In the dynamic activities (Walking,
+    WalkingUpstairs,WalkingDownstairs) motion info will be significant.
+  \end{itemize}
+\end{itemize}
+
+    \hypertarget{stationary-and-moving-activities-are-completely-different}{%
+\subsubsection{2. Stationary and Moving activities are completely
+different}\label{stationary-and-moving-activities-are-completely-different}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}palette}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Set1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{desat}\PY{o}{=}\PY{l+m+mf}{0.80}\PY{p}{)}
+         \PY{n}{facetgrid} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{FacetGrid}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,}\PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{facetgrid}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tBodyAccMagmean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PYZbs{}
+             \PY{o}{.}\PY{n}{add\PYZus{}legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Stationary Activities}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.956}\PY{p}{,}\PY{l+m+mi}{17}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.9}\PY{p}{,} \PY{l+m+mi}{23}\PY{p}{)}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,}\PYZbs{}
+                     \PY{n}{va}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                     \PY{n}{arrowprops}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{arrowstyle}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{simple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{connectionstyle}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{arc3,rad=0.1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Moving Activities}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,}\PYZbs{}
+                     \PY{n}{va}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                     \PY{n}{arrowprops}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{arrowstyle}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{simple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{connectionstyle}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{arc3,rad=0.1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} for plotting purposes taking datapoints of each activity to a different dataframe}
+         \PY{n}{df1} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{df2} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{df3} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{]}
+         \PY{n}{df4} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{4}\PY{p}{]}
+         \PY{n}{df5} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{5}\PY{p}{]}
+         \PY{n}{df6} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{6}\PY{p}{]}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Stationary Activities(Zoomed in)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{df4}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tBodyAccMagmean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hist} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sitting}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{df5}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tBodyAccMagmean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hist} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}\PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Standing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{df6}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tBodyAccMagmean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hist} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Laying}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.01}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{35}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Moving Activities}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tBodyAccMagmean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hist} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Walking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tBodyAccMagmean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hist} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}\PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Walking Up}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{df3}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tBodyAccMagmean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{hist} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Walking down}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{magnitude-of-an-acceleration-can-saperate-it-well}{%
+\subsubsection{3. Magnitude of an acceleration can saperate it
+well}\label{magnitude-of-an-acceleration-can-saperate-it-well}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tBodyAccMagmean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{,} \PY{n}{showfliers}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{saturation}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Acceleration Magnitude mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{xmin}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{xmax}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{n}{dashes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{xmin}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,} \PY{n}{dashes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \_\_ Observations\_\_: - If tAccMean is \textless{} -0.8 then the
+Activities are either Standing or Sitting or Laying. - If tAccMean is
+\textgreater{} -0.6 then the Activities are either Walking or
+WalkingDownstairs or WalkingUpstairs. - If tAccMean \textgreater{} 0.0
+then the Activity is WalkingDownstairs. - We can classify 75\% the
+Acitivity labels with some errors.
+
+    \hypertarget{position-of-gravityaccelerationcomponants-also-matters}{%
+\subsubsection{4. Position of GravityAccelerationComponants also
+matters}\label{position-of-gravityaccelerationcomponants-also-matters}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{angleXgravityMean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{train}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+m+mf}{0.08}\PY{p}{,} \PY{n}{xmin}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{xmax}\PY{o}{=}\PY{l+m+mf}{0.9}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dashes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Angle between X\PYZhy{}axis and Gravity\PYZus{}mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation} \PY{o}{=} \PY{l+m+mi}{40}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \_\_ Observations\_\_: * If angleX,gravityMean \textgreater{} 0 then
+Activity is Laying. * We can classify all datapoints belonging to Laying
+activity with just a single if else statement.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{angleYgravityMean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{train}\PY{p}{,} \PY{n}{showfliers}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Angle between Y\PYZhy{}axis and Gravity\PYZus{}mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation} \PY{o}{=} \PY{l+m+mi}{40}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{axhline}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.22}\PY{p}{,} \PY{n}{xmin}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{xmax}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{dashes}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    
+
+    
+
+    
+
+    \hypertarget{apply-t-sne-on-the-data}{%
+\section{Apply t-sne on the data}\label{apply-t-sne-on-the-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{manifold} \PY{k}{import} \PY{n}{TSNE}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{} performs t\PYZhy{}sne with different perplexity values and their repective plots..}
+         
+         \PY{k}{def} \PY{n+nf}{perform\PYZus{}tsne}\PY{p}{(}\PY{n}{X\PYZus{}data}\PY{p}{,} \PY{n}{y\PYZus{}data}\PY{p}{,} \PY{n}{perplexities}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{img\PYZus{}name\PYZus{}prefix}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZhy{}sne}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 
+             \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{perplexity} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{perplexities}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} perform t\PYZhy{}sne}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{performing tsne with perplexity }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ and with }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ iterations at max}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{perplexity}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{X\PYZus{}reduced} \PY{o}{=} \PY{n}{TSNE}\PY{p}{(}\PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{perplexity}\PY{o}{=}\PY{n}{perplexity}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X\PYZus{}data}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Done..}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} prepare the data for seaborn         }
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Creating plot for this t\PYZhy{}sne visualization..}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{X\PYZus{}reduced}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{X\PYZus{}reduced}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{y\PYZus{}data}\PY{p}{\PYZcb{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} draw the plot in appropriate place in the grid}
+                 \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{df}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fit\PYZus{}reg}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,}\PYZbs{}
+                            \PY{n}{palette}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Set1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{markers}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{perplexity : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ and max\PYZus{}iter : }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{perplexity}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{img\PYZus{}name} \PY{o}{=} \PY{n}{img\PYZus{}name\PYZus{}prefix} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}perp\PYZus{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZus{}iter\PYZus{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{.png}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{perplexity}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saving this plot as image in present working directory...}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{n}{img\PYZus{}name}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Done}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{X\PYZus{}pre\PYZus{}tsne} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Activity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{y\PYZus{}pre\PYZus{}tsne} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ActivityName}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{perform\PYZus{}tsne}\PY{p}{(}\PY{n}{X\PYZus{}data} \PY{o}{=} \PY{n}{X\PYZus{}pre\PYZus{}tsne}\PY{p}{,}\PY{n}{y\PYZus{}data}\PY{o}{=}\PY{n}{y\PYZus{}pre\PYZus{}tsne}\PY{p}{,} \PY{n}{perplexities} \PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+performing tsne with perplexity 2 and with 1000 iterations at max
+[t-SNE] Computing 7 nearest neighbors{\ldots}
+[t-SNE] Indexed 7352 samples in 0.426s{\ldots}
+[t-SNE] Computed neighbors for 7352 samples in 72.001s{\ldots}
+[t-SNE] Computed conditional probabilities for sample 1000 / 7352
+[t-SNE] Computed conditional probabilities for sample 2000 / 7352
+[t-SNE] Computed conditional probabilities for sample 3000 / 7352
+[t-SNE] Computed conditional probabilities for sample 4000 / 7352
+[t-SNE] Computed conditional probabilities for sample 5000 / 7352
+[t-SNE] Computed conditional probabilities for sample 6000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7352 / 7352
+[t-SNE] Mean sigma: 0.635855
+[t-SNE] Computed conditional probabilities in 0.071s
+[t-SNE] Iteration 50: error = 124.8017578, gradient norm = 0.0253939 (50 iterations in 16.625s)
+[t-SNE] Iteration 100: error = 107.2019501, gradient norm = 0.0284782 (50 iterations in 9.735s)
+[t-SNE] Iteration 150: error = 100.9872894, gradient norm = 0.0185151 (50 iterations in 5.346s)
+[t-SNE] Iteration 200: error = 97.6054382, gradient norm = 0.0142084 (50 iterations in 7.013s)
+[t-SNE] Iteration 250: error = 95.3084183, gradient norm = 0.0132592 (50 iterations in 5.703s)
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 95.308418
+[t-SNE] Iteration 300: error = 4.1209540, gradient norm = 0.0015668 (50 iterations in 7.156s)
+[t-SNE] Iteration 350: error = 3.2113254, gradient norm = 0.0009953 (50 iterations in 8.022s)
+[t-SNE] Iteration 400: error = 2.7819963, gradient norm = 0.0007203 (50 iterations in 9.419s)
+[t-SNE] Iteration 450: error = 2.5178111, gradient norm = 0.0005655 (50 iterations in 9.370s)
+[t-SNE] Iteration 500: error = 2.3341548, gradient norm = 0.0004804 (50 iterations in 7.681s)
+[t-SNE] Iteration 550: error = 2.1961622, gradient norm = 0.0004183 (50 iterations in 7.097s)
+[t-SNE] Iteration 600: error = 2.0867445, gradient norm = 0.0003664 (50 iterations in 9.274s)
+[t-SNE] Iteration 650: error = 1.9967778, gradient norm = 0.0003279 (50 iterations in 7.697s)
+[t-SNE] Iteration 700: error = 1.9210005, gradient norm = 0.0002984 (50 iterations in 8.174s)
+[t-SNE] Iteration 750: error = 1.8558111, gradient norm = 0.0002776 (50 iterations in 9.747s)
+[t-SNE] Iteration 800: error = 1.7989457, gradient norm = 0.0002569 (50 iterations in 8.687s)
+[t-SNE] Iteration 850: error = 1.7490212, gradient norm = 0.0002394 (50 iterations in 8.407s)
+[t-SNE] Iteration 900: error = 1.7043383, gradient norm = 0.0002224 (50 iterations in 8.351s)
+[t-SNE] Iteration 950: error = 1.6641431, gradient norm = 0.0002098 (50 iterations in 7.841s)
+[t-SNE] Iteration 1000: error = 1.6279151, gradient norm = 0.0001989 (50 iterations in 5.623s)
+[t-SNE] Error after 1000 iterations: 1.627915
+Done..
+Creating plot for this t-sne visualization..
+saving this plot as image in present working directory{\ldots}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done
+
+performing tsne with perplexity 5 and with 1000 iterations at max
+[t-SNE] Computing 16 nearest neighbors{\ldots}
+[t-SNE] Indexed 7352 samples in 0.263s{\ldots}
+[t-SNE] Computed neighbors for 7352 samples in 48.983s{\ldots}
+[t-SNE] Computed conditional probabilities for sample 1000 / 7352
+[t-SNE] Computed conditional probabilities for sample 2000 / 7352
+[t-SNE] Computed conditional probabilities for sample 3000 / 7352
+[t-SNE] Computed conditional probabilities for sample 4000 / 7352
+[t-SNE] Computed conditional probabilities for sample 5000 / 7352
+[t-SNE] Computed conditional probabilities for sample 6000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7352 / 7352
+[t-SNE] Mean sigma: 0.961265
+[t-SNE] Computed conditional probabilities in 0.122s
+[t-SNE] Iteration 50: error = 114.1862640, gradient norm = 0.0184120 (50 iterations in 55.655s)
+[t-SNE] Iteration 100: error = 97.6535568, gradient norm = 0.0174309 (50 iterations in 12.580s)
+[t-SNE] Iteration 150: error = 93.1900101, gradient norm = 0.0101048 (50 iterations in 9.180s)
+[t-SNE] Iteration 200: error = 91.2315445, gradient norm = 0.0074560 (50 iterations in 10.340s)
+[t-SNE] Iteration 250: error = 90.0714417, gradient norm = 0.0057667 (50 iterations in 9.458s)
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 90.071442
+[t-SNE] Iteration 300: error = 3.5796804, gradient norm = 0.0014691 (50 iterations in 8.718s)
+[t-SNE] Iteration 350: error = 2.8173938, gradient norm = 0.0007508 (50 iterations in 10.180s)
+[t-SNE] Iteration 400: error = 2.4344938, gradient norm = 0.0005251 (50 iterations in 10.506s)
+[t-SNE] Iteration 450: error = 2.2156141, gradient norm = 0.0004069 (50 iterations in 10.072s)
+[t-SNE] Iteration 500: error = 2.0703306, gradient norm = 0.0003340 (50 iterations in 10.511s)
+[t-SNE] Iteration 550: error = 1.9646366, gradient norm = 0.0002816 (50 iterations in 9.792s)
+[t-SNE] Iteration 600: error = 1.8835558, gradient norm = 0.0002471 (50 iterations in 9.098s)
+[t-SNE] Iteration 650: error = 1.8184001, gradient norm = 0.0002184 (50 iterations in 8.656s)
+[t-SNE] Iteration 700: error = 1.7647167, gradient norm = 0.0001961 (50 iterations in 9.063s)
+[t-SNE] Iteration 750: error = 1.7193680, gradient norm = 0.0001796 (50 iterations in 9.754s)
+[t-SNE] Iteration 800: error = 1.6803776, gradient norm = 0.0001655 (50 iterations in 9.540s)
+[t-SNE] Iteration 850: error = 1.6465144, gradient norm = 0.0001538 (50 iterations in 9.953s)
+[t-SNE] Iteration 900: error = 1.6166563, gradient norm = 0.0001421 (50 iterations in 10.270s)
+[t-SNE] Iteration 950: error = 1.5901035, gradient norm = 0.0001335 (50 iterations in 6.609s)
+[t-SNE] Iteration 1000: error = 1.5664237, gradient norm = 0.0001257 (50 iterations in 8.553s)
+[t-SNE] Error after 1000 iterations: 1.566424
+Done..
+Creating plot for this t-sne visualization..
+saving this plot as image in present working directory{\ldots}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done
+
+performing tsne with perplexity 10 and with 1000 iterations at max
+[t-SNE] Computing 31 nearest neighbors{\ldots}
+[t-SNE] Indexed 7352 samples in 0.410s{\ldots}
+[t-SNE] Computed neighbors for 7352 samples in 64.801s{\ldots}
+[t-SNE] Computed conditional probabilities for sample 1000 / 7352
+[t-SNE] Computed conditional probabilities for sample 2000 / 7352
+[t-SNE] Computed conditional probabilities for sample 3000 / 7352
+[t-SNE] Computed conditional probabilities for sample 4000 / 7352
+[t-SNE] Computed conditional probabilities for sample 5000 / 7352
+[t-SNE] Computed conditional probabilities for sample 6000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7352 / 7352
+[t-SNE] Mean sigma: 1.133828
+[t-SNE] Computed conditional probabilities in 0.214s
+[t-SNE] Iteration 50: error = 106.0169220, gradient norm = 0.0194293 (50 iterations in 24.550s)
+[t-SNE] Iteration 100: error = 90.3036194, gradient norm = 0.0097653 (50 iterations in 11.936s)
+[t-SNE] Iteration 150: error = 87.3132935, gradient norm = 0.0053059 (50 iterations in 11.246s)
+[t-SNE] Iteration 200: error = 86.1169128, gradient norm = 0.0035844 (50 iterations in 11.864s)
+[t-SNE] Iteration 250: error = 85.4133606, gradient norm = 0.0029100 (50 iterations in 11.944s)
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.413361
+[t-SNE] Iteration 300: error = 3.1394315, gradient norm = 0.0013976 (50 iterations in 11.742s)
+[t-SNE] Iteration 350: error = 2.4929206, gradient norm = 0.0006466 (50 iterations in 11.627s)
+[t-SNE] Iteration 400: error = 2.1733041, gradient norm = 0.0004230 (50 iterations in 11.846s)
+[t-SNE] Iteration 450: error = 1.9884514, gradient norm = 0.0003124 (50 iterations in 11.405s)
+[t-SNE] Iteration 500: error = 1.8702440, gradient norm = 0.0002514 (50 iterations in 11.320s)
+[t-SNE] Iteration 550: error = 1.7870129, gradient norm = 0.0002107 (50 iterations in 12.009s)
+[t-SNE] Iteration 600: error = 1.7246909, gradient norm = 0.0001824 (50 iterations in 10.632s)
+[t-SNE] Iteration 650: error = 1.6758548, gradient norm = 0.0001590 (50 iterations in 11.270s)
+[t-SNE] Iteration 700: error = 1.6361949, gradient norm = 0.0001451 (50 iterations in 12.072s)
+[t-SNE] Iteration 750: error = 1.6034756, gradient norm = 0.0001305 (50 iterations in 11.607s)
+[t-SNE] Iteration 800: error = 1.5761518, gradient norm = 0.0001188 (50 iterations in 9.409s)
+[t-SNE] Iteration 850: error = 1.5527289, gradient norm = 0.0001113 (50 iterations in 8.309s)
+[t-SNE] Iteration 900: error = 1.5328671, gradient norm = 0.0001021 (50 iterations in 9.433s)
+[t-SNE] Iteration 950: error = 1.5152045, gradient norm = 0.0000974 (50 iterations in 11.488s)
+[t-SNE] Iteration 1000: error = 1.4999681, gradient norm = 0.0000933 (50 iterations in 10.593s)
+[t-SNE] Error after 1000 iterations: 1.499968
+Done..
+Creating plot for this t-sne visualization..
+saving this plot as image in present working directory{\ldots}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done
+
+performing tsne with perplexity 20 and with 1000 iterations at max
+[t-SNE] Computing 61 nearest neighbors{\ldots}
+[t-SNE] Indexed 7352 samples in 0.425s{\ldots}
+[t-SNE] Computed neighbors for 7352 samples in 61.792s{\ldots}
+[t-SNE] Computed conditional probabilities for sample 1000 / 7352
+[t-SNE] Computed conditional probabilities for sample 2000 / 7352
+[t-SNE] Computed conditional probabilities for sample 3000 / 7352
+[t-SNE] Computed conditional probabilities for sample 4000 / 7352
+[t-SNE] Computed conditional probabilities for sample 5000 / 7352
+[t-SNE] Computed conditional probabilities for sample 6000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7352 / 7352
+[t-SNE] Mean sigma: 1.274335
+[t-SNE] Computed conditional probabilities in 0.355s
+[t-SNE] Iteration 50: error = 97.5202179, gradient norm = 0.0223863 (50 iterations in 21.168s)
+[t-SNE] Iteration 100: error = 83.9500732, gradient norm = 0.0059110 (50 iterations in 17.306s)
+[t-SNE] Iteration 150: error = 81.8804779, gradient norm = 0.0035797 (50 iterations in 14.258s)
+[t-SNE] Iteration 200: error = 81.1615143, gradient norm = 0.0022536 (50 iterations in 14.130s)
+[t-SNE] Iteration 250: error = 80.7704086, gradient norm = 0.0018108 (50 iterations in 15.340s)
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 80.770409
+[t-SNE] Iteration 300: error = 2.6957574, gradient norm = 0.0012993 (50 iterations in 13.605s)
+[t-SNE] Iteration 350: error = 2.1637220, gradient norm = 0.0005765 (50 iterations in 13.248s)
+[t-SNE] Iteration 400: error = 1.9143614, gradient norm = 0.0003474 (50 iterations in 14.774s)
+[t-SNE] Iteration 450: error = 1.7684202, gradient norm = 0.0002458 (50 iterations in 15.502s)
+[t-SNE] Iteration 500: error = 1.6744757, gradient norm = 0.0001923 (50 iterations in 14.808s)
+[t-SNE] Iteration 550: error = 1.6101606, gradient norm = 0.0001575 (50 iterations in 14.043s)
+[t-SNE] Iteration 600: error = 1.5641028, gradient norm = 0.0001344 (50 iterations in 15.769s)
+[t-SNE] Iteration 650: error = 1.5291905, gradient norm = 0.0001182 (50 iterations in 15.834s)
+[t-SNE] Iteration 700: error = 1.5024391, gradient norm = 0.0001055 (50 iterations in 15.398s)
+[t-SNE] Iteration 750: error = 1.4809053, gradient norm = 0.0000965 (50 iterations in 14.594s)
+[t-SNE] Iteration 800: error = 1.4631859, gradient norm = 0.0000884 (50 iterations in 15.025s)
+[t-SNE] Iteration 850: error = 1.4486470, gradient norm = 0.0000832 (50 iterations in 14.060s)
+[t-SNE] Iteration 900: error = 1.4367288, gradient norm = 0.0000804 (50 iterations in 12.389s)
+[t-SNE] Iteration 950: error = 1.4270191, gradient norm = 0.0000761 (50 iterations in 10.392s)
+[t-SNE] Iteration 1000: error = 1.4189968, gradient norm = 0.0000787 (50 iterations in 12.355s)
+[t-SNE] Error after 1000 iterations: 1.418997
+Done..
+Creating plot for this t-sne visualization..
+saving this plot as image in present working directory{\ldots}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done
+
+performing tsne with perplexity 50 and with 1000 iterations at max
+[t-SNE] Computing 151 nearest neighbors{\ldots}
+[t-SNE] Indexed 7352 samples in 0.376s{\ldots}
+[t-SNE] Computed neighbors for 7352 samples in 73.164s{\ldots}
+[t-SNE] Computed conditional probabilities for sample 1000 / 7352
+[t-SNE] Computed conditional probabilities for sample 2000 / 7352
+[t-SNE] Computed conditional probabilities for sample 3000 / 7352
+[t-SNE] Computed conditional probabilities for sample 4000 / 7352
+[t-SNE] Computed conditional probabilities for sample 5000 / 7352
+[t-SNE] Computed conditional probabilities for sample 6000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7000 / 7352
+[t-SNE] Computed conditional probabilities for sample 7352 / 7352
+[t-SNE] Mean sigma: 1.437672
+[t-SNE] Computed conditional probabilities in 0.844s
+[t-SNE] Iteration 50: error = 86.1525574, gradient norm = 0.0242986 (50 iterations in 36.249s)
+[t-SNE] Iteration 100: error = 75.9874649, gradient norm = 0.0061005 (50 iterations in 30.453s)
+[t-SNE] Iteration 150: error = 74.7072296, gradient norm = 0.0024708 (50 iterations in 28.461s)
+[t-SNE] Iteration 200: error = 74.2736282, gradient norm = 0.0018644 (50 iterations in 27.735s)
+[t-SNE] Iteration 250: error = 74.0722427, gradient norm = 0.0014078 (50 iterations in 26.835s)
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 74.072243
+[t-SNE] Iteration 300: error = 2.1539080, gradient norm = 0.0011796 (50 iterations in 25.445s)
+[t-SNE] Iteration 350: error = 1.7567128, gradient norm = 0.0004845 (50 iterations in 21.282s)
+[t-SNE] Iteration 400: error = 1.5888531, gradient norm = 0.0002798 (50 iterations in 21.015s)
+[t-SNE] Iteration 450: error = 1.4956820, gradient norm = 0.0001894 (50 iterations in 23.332s)
+[t-SNE] Iteration 500: error = 1.4359720, gradient norm = 0.0001420 (50 iterations in 23.083s)
+[t-SNE] Iteration 550: error = 1.3947564, gradient norm = 0.0001117 (50 iterations in 19.626s)
+[t-SNE] Iteration 600: error = 1.3653858, gradient norm = 0.0000949 (50 iterations in 22.752s)
+[t-SNE] Iteration 650: error = 1.3441534, gradient norm = 0.0000814 (50 iterations in 23.972s)
+[t-SNE] Iteration 700: error = 1.3284039, gradient norm = 0.0000742 (50 iterations in 20.636s)
+[t-SNE] Iteration 750: error = 1.3171139, gradient norm = 0.0000700 (50 iterations in 20.407s)
+[t-SNE] Iteration 800: error = 1.3085558, gradient norm = 0.0000657 (50 iterations in 24.951s)
+[t-SNE] Iteration 850: error = 1.3017821, gradient norm = 0.0000603 (50 iterations in 24.719s)
+[t-SNE] Iteration 900: error = 1.2962619, gradient norm = 0.0000586 (50 iterations in 24.500s)
+[t-SNE] Iteration 950: error = 1.2914882, gradient norm = 0.0000573 (50 iterations in 24.132s)
+[t-SNE] Iteration 1000: error = 1.2874244, gradient norm = 0.0000546 (50 iterations in 22.840s)
+[t-SNE] Error after 1000 iterations: 1.287424
+Done..
+Creating plot for this t-sne visualization..
+saving this plot as image in present working directory{\ldots}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done
+
+    \end{Verbatim}
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
